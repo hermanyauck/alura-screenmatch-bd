@@ -1,4 +1,4 @@
-package com.hermanyauck.screenmatch.modelos;
+package com.hermanyauck.screenmatch.services;
 
 import java.io.IOException;
 import java.net.URI;
