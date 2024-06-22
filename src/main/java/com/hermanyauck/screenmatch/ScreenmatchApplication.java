@@ -1,5 +1,6 @@
 package com.hermanyauck.screenmatch;
 
+import com.hermanyauck.screenmatch.models.DatosEpisodio;
 import com.hermanyauck.screenmatch.models.DatosSerie;
 import com.hermanyauck.screenmatch.services.ConvertDatos;
 import org.springframework.boot.CommandLineRunner;
@@ -21,6 +22,9 @@ public class ScreenmatchApplication implements CommandLineRunner {
 		//System.out.println(json);
 		ConvertDatos conversor = new ConvertDatos();
 		var datos = conversor.obtenerDatos(json, DatosSerie.class);
-		System.out.println(datos);
+
+		json = consumoAPI.obtenerDatos("https://www.omdbapi.com/?t=game+of+thrones&Season=1&Episode=1&apikey=fab839fa");
+		DatosEpisodio dato = conversor.obtenerDatos(json, DatosEpisodio.class);
+		System.out.println(dato);
 	}
 }
