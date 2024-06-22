@@ -12,7 +12,7 @@ public record DatosEpisodio(
     Integer numEpisodio,
 
     @JsonAlias("imdbRating")
-    Float evaluacion,
+    String evaluacion,
 
     @JsonAlias("Released")
     String fechaPublicado) {
