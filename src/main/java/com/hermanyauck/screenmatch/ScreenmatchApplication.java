@@ -20,19 +20,19 @@ public class ScreenmatchApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception{
         ConsumirAPI serie = new ConsumirAPI("https://www.omdbapi.com/?t=game+of+thrones&apikey=fab839fa");
         var datosS = serie.obtenerDatos(DatosSerie.class);
-        //System.out.println(datos);
+        //System.out.println(datosS);
 
 		ConsumirAPI episodio = new ConsumirAPI("https://www.omdbapi.com/?t=game+of+thrones&Season=1&Episode=1&apikey=fab839fa");
 		var datosE = episodio.obtenerDatos(DatosEpisodio.class);
-		System.out.println(datosE);
+		//System.out.println(datosE);
 
-		List<DatosTemporada> temporadas = new ArrayList<>();
-		ConsumirAPI temporada
+		List<DatosTemporada> temporadasList = new ArrayList<>();
+		//ConsumirAPI temporadas
 		for (int i = 1; i <= datosS.temporadas() ; i++ ){
-			json = consumoAPI.obtenerDatos("https://www.omdbapi.com/?t=game+of+thrones&Season="+i+"&apikey=fab839fa");
-			var temporada = conversor.obtenerDatos(json, DatosTemporada.class);
-			temporadas.add(temporada);
+			ConsumirAPI temporadas = new ConsumirAPI("https://www.omdbapi.com/?t=game+of+thrones&Season="+i+"&apikey=fab839fa");
+			var datosT = temporadas.obtenerDatos(DatosTemporada.class);
+			temporadasList.add(datosT);
 		}
-		temporadas.forEach(System.out::println);
+		temporadasList.forEach(System.out::println);
 	}
 }
