@@ -47,4 +47,7 @@ public class ConsumirAPI implements IConvertDatos{
         }
     }
 
+    public String getJson() {
+        return json;
+    }
 }

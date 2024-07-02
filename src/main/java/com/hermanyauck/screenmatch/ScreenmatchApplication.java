@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 @SpringBootApplication
 public class ScreenmatchApplication implements CommandLineRunner {
@@ -18,18 +19,23 @@ public class ScreenmatchApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception{
-        ConsumirAPI serie = new ConsumirAPI("https://www.omdbapi.com/?t=game+of+thrones&apikey=fab839fa");
-        var datosS = serie.obtenerDatos(DatosSerie.class);
-        //System.out.println(datosS);
+		System.out.println("Cual serie quiere consultar: ");
+		Scanner teclado = new Scanner(System.in);
+		String inSerie = teclado.nextLine();
 
-		ConsumirAPI episodio = new ConsumirAPI("https://www.omdbapi.com/?t=game+of+thrones&Season=1&Episode=1&apikey=fab839fa");
+
+		ConsumirAPI serie = new ConsumirAPI("https://www.omdbapi.com/?t="+inSerie.replace(" ","+")+"&apikey=fab839fa");
+		System.out.println(serie.getJson());
+        var datosS = serie.obtenerDatos(DatosSerie.class);
+        System.out.println(datosS);
+
+		ConsumirAPI episodio = new ConsumirAPI("https://www.omdbapi.com/?t="+inSerie.replace(" ","+")+"&Season=1&Episode=1&apikey=fab839fa");
 		var datosE = episodio.obtenerDatos(DatosEpisodio.class);
-		//System.out.println(datosE);
+		System.out.println(datosE);
 
 		List<DatosTemporada> temporadasList = new ArrayList<>();
-		//ConsumirAPI temporadas
 		for (int i = 1; i <= datosS.temporadas() ; i++ ){
-			ConsumirAPI temporadas = new ConsumirAPI("https://www.omdbapi.com/?t=game+of+thrones&Season="+i+"&apikey=fab839fa");
+			ConsumirAPI temporadas = new ConsumirAPI("https://www.omdbapi.com/?t="+inSerie.replace(" ","+")+"&Season="+i+"&apikey=fab839fa");
 			var datosT = temporadas.obtenerDatos(DatosTemporada.class);
 			temporadasList.add(datosT);
 		}
