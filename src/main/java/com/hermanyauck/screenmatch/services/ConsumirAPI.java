@@ -50,4 +50,6 @@ public class ConsumirAPI implements IConvertDatos{
     public String getJson() {
         return json;
     }
+
+    public String getUrl() { return url; }
 }
