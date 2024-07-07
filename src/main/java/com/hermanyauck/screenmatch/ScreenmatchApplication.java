@@ -48,10 +48,17 @@ public class ScreenmatchApplication implements CommandLineRunner {
 				.flatMap(t -> t.episodio().stream())
 				.toList();
 
-		datosEpisodios.stream()
-				.filter(e -> !e.evaluacion().equals("N/A"))
-				.sorted(Comparator.comparing(DatosEpisodio::evaluacion).reversed())
-				.limit(5)
-				.forEach(System.out::println);
+//		datosEpisodios.stream()
+//				.filter(e -> !e.evaluacion().equals("N/A"))
+//				.sorted(Comparator.comparing(DatosEpisodio::evaluacion).reversed())
+//				.limit(5)
+//				.forEach(System.out::println);
+
+		List<Episodio> episodios = temporadasList.stream()
+				.flatMap(t -> t.episodio().stream()
+						.map(e -> new Episodio(t.numTemporada(),e)))
+				.collect(Collectors.toList());
+
+		episodios.forEach(System.out::println);
 	}
 }
